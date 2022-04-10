@@ -1,13 +1,12 @@
 const path = require('path');
-const app = express();
-require('dotenv').config();
 const express = require('express');
+require('dotenv').config();
 
+const app = express();
 
 const enableHMR = (process.env.ENABLE_HMR || 'true') === 'true';
 
 if ((process.env.NODE_ENV !== 'production') && enableHMR) {
-  console.log('Adding dev middleware, enabling HMR');
   const webpack = require('webpack');
   const devMiddleware = require('webpack-dev-middleware');
   const hotMiddleware = require('webpack-hot-middleware');

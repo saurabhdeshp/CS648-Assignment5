@@ -14,12 +14,22 @@ type Product {
     url: String!
 }
 
+input ProductUpdateInputs {
+  name: String
+  category: Categories
+  price: Float
+  imageUrl: String
+}
+
 #Queries
 type Query {
     getAllProducts: [Product!]!
+    product(id: Int!): Product!
 }
 
 #Mutations
 type Mutation {
     addProduct( category: String!, name: String!, price: Float!, url: String!): Product!
+    updateProduct(id: Int!, changes: ProductUpdateInputs!): Product!
+    deleteProduct(id: Int!): Boolean!
 }

@@ -24,6 +24,6 @@ Go to api and ui folder and run `npm run lint`
 
 open mongo shell 
 go to api directory
-run `load("/scripts/init.mongo.js")\n` 
+run `load("/scripts/init.mongo.js")` 
     OR run `mongosh "mongodb+srv://cluster0.scjap.mongodb.net/myFirstDatabase" --apiVersion 1 --username assignment4`
 

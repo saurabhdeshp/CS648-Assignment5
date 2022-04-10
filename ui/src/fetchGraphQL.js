@@ -9,11 +9,11 @@ export default async function fetchGraphQL(query, variables = {}) {
   
       if (result.errors) {
         const error = result.errors[0];
-        alert('Error while quering for data - ', error);
+        alert('Error while quering - ', error);
       }
       return result.data;
     } catch (e) {
-      alert(`Error in sending data to server: ${e.message}`);
+      alert(`Error in data sending -  ${e.message}`);
       return null;
     }
   }

@@ -24,7 +24,7 @@ export default class ProductImage extends React.Component {
     const { match: { params: { id } } } = this.props;
     const query = `query product($id: Int!) {
       product (id: $id) {
-        id name imageUrl
+        id name url
       }
     }`;
 
@@ -37,13 +37,13 @@ export default class ProductImage extends React.Component {
   }
 
   render() {
-    const { product: { id, name, imageUrl } } = this.state;
+    const { product: { id, name, url } } = this.state;
 
     if (!id) {
       return (<p>{`Product with Id ${id} not present in the Database`}</p>);
     }
 
-    if (!imageUrl) {
+    if (!url) {
       return (
         <p>{`No Image Url set for Product with id ${id}`}</p>
       );
@@ -51,8 +51,8 @@ export default class ProductImage extends React.Component {
 
     return (
       <div>
-        <h3>{`Viewing Image of Product with name - ${name}`}</h3>
-        <img src={imageUrl} alt={`Product id ${id}`} />
+        <h3>{`Viewing Image of - ${name}`}</h3>
+        <img src={url} alt={`Product id ${id}`} />
       </div>
     );
   }

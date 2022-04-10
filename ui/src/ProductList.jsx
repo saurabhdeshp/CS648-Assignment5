@@ -18,35 +18,37 @@ export default class ProductList extends React.Component {
   }
 
   async loadData() {
+    console.log("In loadData");
     const query = `
-            query {
-                productList {
-                    id
-                    name
-                    category
-                    price
-                    imageUrl
-                }
-            }
-        `;
+    query{
+      getAllProducts {
+        category
+        id
+        name
+        url
+        price
+      }`;
 
     const data = await fetchGraphQL(query);
 
     if (data) {
-      this.setState({ products: data.productList, initialLoading: false });
+      console.log(data)
+      this.setState({ products: data.getAllProducts, initialLoading: false });
     }
   }
 
   async addProduct(product) {
-    const query = `
-            mutation addProduct($product: ProductInputs!) {
-                addProduct(product: $product) {
-                    id
-                }
-            }
-        `;
+    const query = `mutation addProduct( $category: String!, $name: String!, $price: Float!, $url: String!){
+      addProduct( category: $category, name: $name, price: $price, url: $url) {
+        id
+        name
+        price 
+        url
+        category
+      }
+    }`;
 
-    const data = await fetchGraphQL(query, { product });
+    const data = await fetchGraphQL(query, product );
     if (data) {
       this.loadData();
     }

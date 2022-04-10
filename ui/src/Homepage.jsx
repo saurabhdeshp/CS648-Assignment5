@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Routes from './Routes.jsx';
+import RouteList from './RouteList.jsx';
 
 const NavigationBar = () => (
     <nav className="nav-bar">
@@ -12,7 +12,7 @@ const NavigationBar = () => (
   const Homepage = () => (
     <div>
       <NavigationBar />
-      <Routes />
+      <RouteList />
     </div>
   );
   

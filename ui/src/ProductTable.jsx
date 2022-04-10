@@ -5,14 +5,14 @@ const NO_DATA_AVAILABLE = 'No Data Available';
 
 function ProductTableRow({ product, deleteProduct, index }) {
   const {
-    name, price, category, imageUrl, id,
+    name, price, category, url, id,
   } = product;
   return (
     <tr>
       <td>{name || NO_DATA_AVAILABLE}</td>
       <td>{price ? `$${price}` : NO_DATA_AVAILABLE}</td>
       <td>{category}</td>
-      <td>{imageUrl ? <Link to={`/img/${id}`}>View</Link> : NO_DATA_AVAILABLE}</td>
+      <td>{url ? <Link to={`/img/${id}`}>View</Link> : NO_DATA_AVAILABLE}</td>
       <td>
         <Link to={`/edit/${id}`}>Edit</Link>
         {' | '}
@@ -44,8 +44,6 @@ export default function ProductTable({
       <thead className="text-left bordered-table">
         <tr>
           {headings.map((heading, index) =>
-            // using index as keys as Table Headings will not change dynamically
-            // eslint-disable-next-line implicit-arrow-linebreak, react/no-array-index-key
             <th key={index}>{heading}</th>)}
           <th>Action</th>
         </tr>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import graphQLFetch from './graphQLFetch.js';
+import fetchGraphQL from './fetchGraphQL.js';
 import NumInput from './NumInput.jsx';
 import TextInput from './TextInput.jsx';
 
@@ -48,12 +48,12 @@ export default class ProductEdit extends React.Component {
         id: $id
         changes: $changes
       ) {
-        id name category price imageUrl
+        id name category price url
       }
     }`;
 
     const { id, ...changes } = product;
-    const data = await graphQLFetch(query, { id, changes });
+    const data = await fetchGraphQL(query, { id, changes });
     if (data) {
       this.setState({ product: data.updateProduct });
       alert('Updated product successfully'); // eslint-disable-line no-alert
@@ -63,18 +63,18 @@ export default class ProductEdit extends React.Component {
   async loadData() {
     const query = `query product($id: Int!) {
       product(id: $id) {
-        id name category price imageUrl
+        id name category price url
       }
     }`;
 
     const { match: { params: { id } } } = this.props;
-    const data = await graphQLFetch(query, { id: parseInt(id, 10) });
+    const data = await fetchGraphQL(query, { id: parseInt(id, 10) });
     if (data) {
       const { product } = data;
       product.name = product.name != null ? product.name : '';
       product.category = product.category != null ? product.category : '';
       product.price = product.price != null ? product.price : '';
-      product.imageUrl = product.imageUrl != null ? product.imageUrl : '';
+      product.url = product.url != null ? product.url : '';
       this.setState({ product, isLoading: false });
     } else {
       this.setState({ product: {}, isLoading: false });
@@ -98,7 +98,7 @@ export default class ProductEdit extends React.Component {
 
     const {
       product: {
-        name, category, price, imageUrl,
+        name, category, price, url,
       },
     } = this.state;
 
@@ -146,8 +146,8 @@ export default class ProductEdit extends React.Component {
               <td className="padding-right-20">Image Url</td>
               <td>
                 <TextInput
-                  name="imageUrl"
-                  value={imageUrl}
+                  name="url"
+                  value={url}
                   onChange={this.onChange}
                   key={id}
                 />
