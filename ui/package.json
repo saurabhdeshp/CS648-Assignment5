@@ -1,7 +1,7 @@
 {
-  "name": "cs648-assignment4",
+  "name": "cs648-assignment5",
   "version": "1.0.0",
-  "description": "CS 648 Assignment 4",
+  "description": "CS 648 Assignment 5",
   "main": "index.js",
   "scripts": {
     "start": "npm run compile && nodemon -w serverui.js -w .env serverui.js",
@@ -23,7 +23,13 @@
   "homepage": "https://github.com/saurabhdeshp/CS648-Assignment4#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "url-search-params": "^1.1.0",
+    "whatwg-fetch": "^3.6.2",
+    "babel-polyfill": "^6.26.0"
   },
   "devDependencies": {
     "eslint-plugin-import": "^2.22.1",
@@ -35,6 +41,11 @@
     "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
     "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.1"
+    "eslint-config-airbnb": "^17.1.1",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-middleware": "^4.1.0",
+    "webpack-hot-middleware": "^2.25.0"
+
   }
 }
