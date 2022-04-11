@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NO_DATA_AVAILABLE = 'No Data Available';
+const NO_DATA_AVAILABLE = 'No Product Available';
 
 function ProductTableRow({ product, deleteProduct, index }) {
   const {
@@ -16,7 +16,7 @@ function ProductTableRow({ product, deleteProduct, index }) {
       <td>
         <Link to={`/edit/${id}`}>Edit</Link>
         {' | '}
-        <button type="button" className="small submit-button submit-button-dark small" onClick={() => { deleteProduct(index); }}>
+        <button type="button"  onClick={() => { deleteProduct(index); }}>
           Delete
         </button>
       </td>
@@ -37,11 +37,11 @@ export default function ProductTable({
       />
     ),
   );
-  const initialTableMessage = loading ? 'Loading products...' : 'No Products added yet';
+  const initialTableMessage = loading ? 'Fetching products...' : 'No Products in the inventory yet';
 
   return (
     <table className="table">
-      <thead className="text-left bordered-table">
+      <thead>
         <tr>
           {headings.map((heading, index) =>
             <th key={index}>{heading}</th>)}

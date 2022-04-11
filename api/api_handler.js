@@ -1,7 +1,7 @@
 const fs = require('fs');
 require('dotenv').config();
 const { ApolloServer } = require('apollo-server-express');
-const Product = require('./product.js');
+const Product = require('./db.js');
 
 const resolvers = {
   Query: {

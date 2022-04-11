@@ -20,14 +20,15 @@ export default class ProductList extends React.Component {
   async loadData() {
     console.log("In loadData");
     const query = `
-    query{
+    query {
       getAllProducts {
         category
         id
         name
         url
         price
-      }`;
+    }  }
+      `;
 
     const data = await fetchGraphQL(query);
 

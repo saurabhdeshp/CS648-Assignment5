@@ -7,7 +7,7 @@
     "start": "npm run compile && nodemon -w serverui.js -w .env serverui.js",
     "server": "nodemon serverui.js",
     "watch": "babel src --presets @babel/preset-react --out-dir public --watch --verbose",
-    "compile": "babel src --presets @babel/react --out-dir public",
+    "compile": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext js,jsx --ignore-pattern public"
   },

@@ -4,21 +4,26 @@ const { MongoClient } = require('mongodb');
 const COUNTERS = 'counters';
 const PRODUCTS = 'products';
 const DELETED_PRODUCTS = 'deleted_products'
-let DB;
 
-const url = process.env.DB_URL || 'mongodb+srv://mongodb+srv://assignment4:CS648@cluster0.scjap.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+let db;
 
-const connectToDatabase = async () => {
+const url = process.env.DB_URL 
+|| 'mongodb+srv://assignment4:CS648@cluster0.scjap.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+async function connectToDatabase () {
   const client = new MongoClient(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
   await client.connect();
-  DB = client.db();
+  console.log( "db Connected")
+  db = client.db();
+//  console.log(await db.collection(PRODUCTS).find({}).toArray())
 };
 
 async function sequenceNumDocument(name) {
-  const result = await DB
+  const result = await db
+
     .collection(COUNTERS)
     .findOneAndUpdate(
       { _id: name },
@@ -31,18 +36,53 @@ async function sequenceNumDocument(name) {
   return result.value.sequenceNum;
 }
 
-function getDatabase() {
-  if (!DB) {
-    throw new Error('Database not connected, try calling connectToDb method before accessing DB.');
-  }
-  return DB;
-}
+const get = async (_, { id }) => {
+    return db.collection(PRODUCTS).findOne({ id });
+  };
+  
+  const list = async () => {
+    return db.collection(PRODUCTS).find({}).toArray();
+  };
+  
+  const add = async (_,  product ) => {
+    product.id = await sequenceNumDocument(PRODUCTS);
+  
+    const result = await db.collection(PRODUCTS).insertOne(product);
+    return db
+      .collection(PRODUCTS)
+      .findOne({ _id: result.insertedId });
+  };
+  
+  const update = async (_, { id, changes }) => {
+    if (changes.name || changes.category || changes.price || changes.url) {
+      const product = await db.collection(PRODUCTS).findOne({ id });
+      Object.assign(product, changes);
+    }
+    await db.collection(PRODUCTS).updateOne({ id }, { $set: changes });
+    return db.collection(PRODUCTS).findOne({ id });
+  };
+  
+  const remove = async (_, { id }) => {
+    const product = await db.collection(PRODUCTS).findOne({ id });
+    if (!product) return false;
+  
+    product.deleted = new Date();
+    let result = await db.collection(DELETED_PRODUCTS).insertOne(product);
+    if (result.insertedId) {
+      result = await db.collection(PRODUCTS).removeOne({ id });
+      return result.deletedCount === 1;
+    }
+    return false;
+  };
+  
+
+
 
 module.exports = {
   connectToDatabase,
   sequenceNumDocument,
-  getDatabase,
   COUNTERS,
   PRODUCTS,
-  DELETED_PRODUCTS
+  DELETED_PRODUCTS,
+  update, list, add, get, delete: remove,
 };
