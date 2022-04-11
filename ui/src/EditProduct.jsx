@@ -1,5 +1,4 @@
 import React from 'react';
-
 import fetchGraphQL from './fetchGraphQL.js';
 import NumInput from './NumInput.jsx';
 import TextInput from './TextInput.jsx';
@@ -56,7 +55,7 @@ export default class ProductEdit extends React.Component {
     const data = await fetchGraphQL(query, { id, changes });
     if (data) {
       this.setState({ product: data.updateProduct });
-      alert('Updated product successfully'); // eslint-disable-line no-alert
+      alert('Updated product successfully'); 
     }
   }
 
@@ -123,7 +122,7 @@ export default class ProductEdit extends React.Component {
             <tr>
               <td>Category</td>
               <td>
-                <select name="category" value={category} className="add-product-form-select" onChange={this.onChange}>
+                <select name="category" value={category} onChange={this.onChange}>
                   <option value="Shirts">Shirts</option>
                   <option value="Jeans">Jeans</option>
                   <option value="Jackets">Jackets</option>
@@ -157,7 +156,7 @@ export default class ProductEdit extends React.Component {
             </tr>
             <tr>
               <td />
-              <td><button type="submit" className="submit-button submit-button-dark">Submit</button></td>
+              <td><button type="submit">Submit</button></td>
             </tr>
           </tbody>
         </table>

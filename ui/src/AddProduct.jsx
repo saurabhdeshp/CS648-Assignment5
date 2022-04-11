@@ -1,11 +1,5 @@
 import React from 'react';
 
-/**
- * Product Add Form.
- * Expects 'addProduct' function as a prop.
- * Uses a controlled state for 'Price' input element for adding '$'.
- * And for rest of the elements, it uses native 'forms' object from DOM.
- */
 export default class ProductAdd extends React.Component {
   constructor() {
     super();
@@ -51,7 +45,7 @@ export default class ProductAdd extends React.Component {
       <form name="productAdd" onSubmit={this.handleSubmit} className="product-form">
         <div className="form-input">
           <label htmlFor="category" className="label">
-            Category
+            Category &emsp; &emsp; &nbsp; 
             <select name="category" className="add-product-form-select">
               <option value="Shirts">Shirts</option>
               <option value="Jeans">Jeans</option>
@@ -64,21 +58,21 @@ export default class ProductAdd extends React.Component {
 
         <div className="form-input">
           <label htmlFor="price" className="label">
-            Price Per Unit
+            Price Per Unit &emsp; 
             <input type="text" name="price" value={price} onChange={this.handlePriceChange} />
           </label>
         </div>
 
         <div className="form-input">
           <label htmlFor="name" className="label">
-            Product Name
+            Product Name &ensp;
             <input type="text" name="name" />
           </label>
         </div>
 
         <div className="form-input">
           <label htmlFor="url" className="label">
-            Image URL
+            Image URL &emsp; &ensp; &nbsp;
             <input type="text" name="url" />
           </label>
         </div>
