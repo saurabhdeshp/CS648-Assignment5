@@ -103,12 +103,14 @@ export default class ProductEdit extends React.Component {
     } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit} className="edit-form">
-        <h3>{`Editing product: ${id}`}</h3>
+
+      <div>
+      <h3>{`Editing product with ID : ${id}`}</h3>
+      <form onSubmit={this.handleSubmit} className="product-form">
         <table>
           <tbody>
             <tr>
-              <td className="padding-right-20">Name</td>
+              <td>Name</td>
               <td>
                 <TextInput
                   name="name"
@@ -119,7 +121,7 @@ export default class ProductEdit extends React.Component {
               </td>
             </tr>
             <tr>
-              <td className="padding-right-20">Category</td>
+              <td>Category</td>
               <td>
                 <select name="category" value={category} className="add-product-form-select" onChange={this.onChange}>
                   <option value="Shirts">Shirts</option>
@@ -131,7 +133,7 @@ export default class ProductEdit extends React.Component {
               </td>
             </tr>
             <tr>
-              <td className="padding-right-20">Price</td>
+              <td>Price</td>
               <td>
                 <NumInput
                   name="price"
@@ -143,7 +145,7 @@ export default class ProductEdit extends React.Component {
               </td>
             </tr>
             <tr>
-              <td className="padding-right-20">Image Url</td>
+              <td>Image Url</td>
               <td>
                 <TextInput
                   name="url"
@@ -160,6 +162,7 @@ export default class ProductEdit extends React.Component {
           </tbody>
         </table>
       </form>
+      </div>
     );
   }
 }
